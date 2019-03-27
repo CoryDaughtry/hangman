@@ -1,130 +1,56 @@
 <!DOCTYPE html>
-<html lang="en-us">
-    <head>
-				<link rel="stylesheet" href="assets/css/style.css">
-				
 
+<html>
 
-    </head>
+<head>
+	<title>Hangman</title>
+ 		<link href="assets/css/reset.css" rel="stylesheet">
+		<link href='https://fonts.googleapis.com/css?family=Rancho' rel='stylesheet' type='text/css'>
+		<link href="assets/css/style.css" rel="stylesheet">
+		
 
-    <body>
-				
-			<div class="container">
-        <h1>Word Game</h1>
-				<h3>Pick a letter and guess the state.</h3>
+</head>
+
+<body>
+
+	<h1> Hangman </h1>
+
+		
+
+ 	<div class="wrapper">
 			
-        
-        <p id="wins"></p>
-        <p id="losses"></p>
-        <p id="guesses"></p>
-        <p id="computerLetter"></p>
-        <p id="missed"></p>
-        <p id="avaliableLetters"></p>
-        <p id="all"></p>
 
-        <script type="text/javascript">
+ 		<div id ="theAnswer">
+  		</div>
 
-            // Variables: Possible letters, # of wins, # of losses, guesses remaining, random letter
-						var avaliableLetters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-						var states = ["mississippi", "texas", "washington", "oregon", "california", "florida","iowa", "maine", "indiana"];
-            var wins = 0;
-            var losses = 0;
-            var guesses = 10;
-            var computerWord = states[Math.floor(Math.random() * states.length)];
-            var miss = [];
-            var answerArray = [];
-            var remainingLetters;
-            
+		<br>
 
-            updateScore();
-            updateGuesses();
-            updateMissed();
-            computer();
-            avaliableLetter();
-     
-            function updateScore() {
-                        document.getElementById("wins").innerHTML = "Wins: " + wins;
-                        document.getElementById("losses").innerHTML = "Losses: " + losses;
-                        
-                        }  
-            
-            function updateGuesses() {
-                document.getElementById("guesses").innerHTML = "Remaining guesses: " + guesses;
-            }
+		<h2> Guesses Left </h2>
 
-            function updateMissed(){
-                document.getElementById("missed").innerHTML = "Letters guessed: " + miss;
-            }
+ 			<div id ="guessesLeft">
+ 			</div>
+			<br>
 
-            function avaliableLetter(){
-                    document.getElementById("avaliableLetters").innerHTML = "Avaliable Letters: " + avaliableLetters;
-            }
+		<h2> "Answers Already Guessed" </h2>
 
-   
-            function computer(){    
-                for(var i = 0; i < computerWord.length; i++){
-                answerArray[i] = "_";
-                }
-            }
+ 			<div id="answersGuessed">
+ 			</div>
+			<br>
 
-           
-            
+		<h2> Loss </h2>
+			<div id="losses">
+ 			</div>
+			<br>
+		
+		<h2> Win </h2>
+			<div id= "game">
+			</div>
+			<br> 
 
-            remainingLetters = computerWord.length;
+	</div>
+
+<script src="assets/javascript/script.js" type="text/javascript"> </script>
+</body>
 
 
-
-            document.onkeyup = function(event)
-            {
-                 
-                var userGuess = event.key;
-
-                for (var j = 0; j < computerWord.length; j++ )
-                {
-
-                    if (computerWord[j] === userGuess)
-                    {
-                        answerArray[j] = userGuess;
-                        remainingLetters--;
-                    }
-                    
-                    if (miss.includes(userGuess) === false)
-                    {
-                        miss.push(userGuess);
-                        updateMissed(); 
-                        avaliableLetters.splice(avaliableLetters.indexOf(userGuess),1);
-                        avaliableLetter();
-                        guesses --;
-                        updateGuesses();  
-                    }
-                    
-                    else if(guesses <= 0){
-                        alert("You Lose!")
-                        losses ++;
-                        updateScore();
-                        guesses = 9;
-                        updateGuesses();
-                        computerWord = states[Math.floor(Math.random() * states.length)];
-                        miss = [];
-                        updateMissed();
-                        
-                        avaliableLetter();
-										}
-									
-                }
-                    
-
-
-                
-                    document.getElementById("all").innerHTML = answerArray.join(" ");
-                
-                
-            }
-				</script>
-				
-		</div>
-    </body>
 </html>
-
-
-
